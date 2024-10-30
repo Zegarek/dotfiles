@@ -23,5 +23,10 @@ fi
 set -o vi
 
 # ssh agent
-eval $(ssh-agent -s)
-ssh-add $HOME/.ssh/id_rsa
+if [ -f "$HOME/.ssh-agent-rc" ]; then
+  source "$HOME/.ssh-agent-rc"
+else 
+  eval $(ssh-agent -s)
+  ssh-add $HOME/.ssh/id_rsa
+fi
+
